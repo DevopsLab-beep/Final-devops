@@ -5,6 +5,7 @@ pipeline {
         stage('Checkout') {
             steps {
                 echo 'Checking out the source code...'
+                echo 'The simple change...'
                 git url: 'https://github.com/DevopsLab-beep/Final-devops.git', branch: 'main'
             }
         }
