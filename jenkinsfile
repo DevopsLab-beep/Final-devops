@@ -1,38 +1,38 @@
 pipeline {
-    agent any
+    agent any // Run the pipeline on any available agent
     
     stages {
         stage('Checkout') {
             steps {
-                echo 'Checking out the code from the repository...'
-                checkout scm
+                echo 'Checking out the source code from the repository...'
+                // Clone the repository from the specified URL and branch
+                git url: 'https://github.com/DevopsLab-beep/Final-devops.git', branch: 'main'
             }
         }
-
+        
         stage('Build') {
             steps {
-                echo 'Building the project...'
-                sh 'mvn clean install'
+                echo 'Building the project using Maven...'
+                // Build the project using Maven; adjust this command as necessary for your project
+                sh 'mvn clean package'
             }
         }
-
+        
         stage('Test') {
             steps {
-                echo 'Running unit tests...'
+                echo 'Running tests...'
+                // Run the tests using Maven; adjust this command as necessary for your project
                 sh 'mvn test'
             }
         }
     }
-
+    
     post {
-        always {
-            echo 'Pipeline execution completed.'
-        }
         success {
             echo 'Pipeline completed successfully!'
         }
         failure {
-            echo 'Pipeline failed. Please check the logs for more details.'
+            echo 'Pipeline failed. Please check the logs for details.'
         }
     }
 }
